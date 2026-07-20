@@ -1,53 +1,24 @@
 import discord
-import os, json, asyncio
+import os, asyncio
 from discord.ext import commands
 import quizdata
+from database import db
 
 os.chdir(os.getcwd())
 
 store_items, store_descriptions = quizdata.store_items, quizdata.store_descriptions
 storekeys, storevalues = list(store_items.keys()), list(store_items.values())
 
-jsondir = os.path.dirname(os.path.dirname(os.getcwd())) + "/jsonfiles"
-
-def open_json(jsonfile):
-	with open(jsondir + '/' + jsonfile, "r") as fp:
-		return json.load(fp)	#openfunc for jsonfiles
-
-def save_json(jsonfile, name):	#savefunc for jsonfiles
-	with open(jsondir + '/' + jsonfile, "w") as fp:
-		json.dump(name, fp)
-
-def add_gold(user: discord.User, newgold: int):		#add gold to users
-	users = open_json("users.json")
-	id = str(user.id)
-	if 2200 in users[id]["items"]:
-		users[id]["gold"] = users[id]["gold"] + round(newgold*1.25)
-		save_json("users.json", users)
-		return round(newgold*1.25)
-	else:
-		users[id]["gold"] = users[id]["gold"] + round(newgold)
-		save_json("users.json", users)
-		return round(newgold)
-
 def strip_str(text):        #function to remove punctuations spaces from string and make it lowercase
-    punctuations = ''' !-;:'`" \,/_?'''
+    punctuations = ''' !-;:'`" ,/_?'''
     text2 = ""
     for char in text:
        if char not in punctuations:
            text2 = text2 + char
     return text2.lower().replace("the", "")
 
-def take_index(l1, l2):     #Function to find the index of items in a list that are available in another list
-    indexi = []
-    for index, item in enumerate(l1):
-        if item in l2:
-            indexi.append(index)
-    return indexi
-
-def helm_of_dominator(author, price):       #give discount if userhas helm of the dominator
-    users = open_json("users.json")
-    if 2350 in users[str(author.id)]["items"]:
+def helm_of_dominator(items, price):       #give discount if userhas helm of the dominator
+    if ("Helm of Dominator" in items):
         price *= 0.95
     return round(price)
 
@@ -66,79 +37,84 @@ class Store(commands.Cog):
 
     @commands.command(brief = "Buy an item from the store.")
     async def buy(self, ctx, *, purchase):
-        users = open_json("users.json")
-        id = str(ctx.author.id)
-        if id not in users.keys():
-            await ctx.send("""You haven't got any gold yet, try "322 help" and use Quiz commands to earn some.""")
-            return
-        purchasestr = strip_str(purchase)
-        user_items = users[id]["items"]
-        user_gold = users[id]["gold"]
-        if purchasestr not in [strip_str(x) for x in storekeys]:    #store validation
-            await ctx.send("That item doesn't exist.")
-        elif purchasestr == "cheese":
-            price = helm_of_dominator(ctx.author, 20000)
-            if user_gold < price:
-                await ctx.send("You don't have enough gold to purchase cheese yet, it costs ``20000`` gold.")
-            else:
-                users[id]["cheese"] = users[id]["cheese"] + 1
-                users[id]["gold"] = users[id]["gold"] - price
-                await ctx.send("You have purchased a cheese!")
-                save_json("users.json", users)
-        else:                   #list of user items is stored as the item prices in json file
-            itemindex = [strip_str(x) for x in storekeys].index(purchasestr)        #get the index of the item being purchased
-            price = helm_of_dominator(ctx.author, storevalues[itemindex])
-            if storevalues[itemindex] in user_items:            #if item is already bought
-                await ctx.send("You already have that item.")
-            elif price > user_gold:             #if item is too expensive
-                await ctx.send(f"You don't have enough gold, this item costs {storevalues[itemindex]} gold.")
-            else:               #item being purchased
-                user_items.append(storevalues[itemindex])       #new item price is appended to users item list
-                users[id]["items"] = user_items        #update the list back as a string of a list
-                users[id]["gold"] = users[id]["gold"] - price      #take away gold
-                await ctx.send("You have purchased the item.")
-                save_json("users.json", users)
+        try:
+            user = db.get_user(ctx.author.id)
+
+            if not user:
+                await ctx.send("""You haven't got any gold yet, try "322 help" and use Quiz commands to earn some.""")
+                return
+
+            user_items = db.get_user_inventory(ctx.author.id)      #get list of items the user has(they're integers)
+            user_items = [tup[1] for tup in user_items]
+            user_gold = user["gold"]
+
+            purchasestr = strip_str(purchase)
+            if purchasestr not in [strip_str(x) for x in storekeys]:    #store validation
+                await ctx.send("That item doesn't exist.")
+            elif purchasestr == "cheese":
+                price = helm_of_dominator(user_items, 20000)
+                if user_gold < price:
+                    await ctx.send("You don't have enough gold to purchase cheese yet, it costs ``20000`` gold.")
+                else:
+                    db.buy_item(ctx.author.id, purchasestr, price)
+                    await ctx.send("You have purchased a cheese!")
+            else:                   #list of user items is stored as the item prices in json file
+                itemindex = [strip_str(x) for x in storekeys].index(purchasestr)        #get the index of the item being purchased
+                itemname = storekeys[itemindex]
+                price = helm_of_dominator(user_items, storevalues[itemindex])
+                if storevalues[itemindex] in user_items:            #if item is already bought
+                    await ctx.send("You already have that item.")
+                elif price > user_gold:             #if item is too expensive
+                    await ctx.send(f"You don't have enough gold, this item costs {storevalues[itemindex]} gold.")
+                else:               #item being purchased
+                    db.buy_item(ctx.author.id, itemname, price)                
+                    await ctx.send("You have purchased the item.")
+        except Exception as e:
+            print("store.py, buy: ", e)
 
     @commands.command(brief = "Sell an item from your inventory.")
     async def sell(self, ctx, *, sale):
-        users = open_json("users.json")
-        id = str(ctx.author.id)
-        if id not in users.keys():
-            await ctx.send("""You haven't got any gold yet, try "322 help" and use Quiz commands to earn some.""")
-            return
-        soldstr = strip_str(sale)             #stripped item to be sold
-        user_items = users[id]["items"]           #user inventory
-        strippeditems = [strip_str(x) for x in storekeys]       #list of stripped store items
-        if soldstr == "cheese":
-            if users[id]["cheese"] <= 0:
-                await ctx.send("You don't have any cheese to sell.")
-            else:
-                users[id]["gold"] = users[id]["gold"] + 15000
-                users[id]["cheese"] = users[id]["cheese"] - 1
-                await ctx.send(f"You have sold the cheese for ``15000`` gold.")
-                save_json("users.json", users)
-        elif soldstr in strippeditems:          #if item exists
-            itemindex = strippeditems.index(soldstr)        #gets index to get item's cost
-            itemcost = storevalues[itemindex]
-            if itemcost in user_items:          #if item is inside user inventory
-                user_items.remove(itemcost)     #remove the item from inventory, add half the gold in
-                users[id]["items"] = user_items
-                users[id]["gold"] = users[id]["gold"] + int(itemcost/2)
-                await ctx.send(f"You sold the item for {int(itemcost/2)} gold.")
-                save_json("users.json", users)
-            else:                     #if item exists but isn't in the inventory
-                await ctx.send("You don't have that item in your inventory in order to sell it.")
-        else:                 #if item doesn't exist at all
-            await ctx.send("That item doesn't exist in the store.")
+        try:
+            user = db.get_user(ctx.author.id)
+
+            if not user:
+                await ctx.send("""You haven't got any gold yet, try "322 help" and use Quiz commands to earn some.""")
+                return
+
+            soldstr = strip_str(sale)             #stripped item to be sold
+            strippeditems = [strip_str(x) for x in storekeys]       #list of stripped store items
+            
+            user_items = db.get_user_inventory(ctx.author.id)      #get list of items the user has(they're integers)
+            user_items = [tup[1] for tup in user_items]
+
+            if soldstr == "cheese":
+                if user["cheese"] <= 0:
+                    await ctx.send("You don't have any cheese to sell.")
+                else:
+                    db.sell_item(ctx.author.id, soldstr, 15000)
+                    await ctx.send(f"You have sold the cheese for ``15000`` gold.")
+            elif soldstr in strippeditems:          #if item exists
+                itemindex = strippeditems.index(soldstr)        #gets index to get item's cost
+                itemname = storekeys[itemindex]
+                sellprice = int(storevalues[itemindex]/2)
+                if itemname in user_items:          #if item is inside user inventory
+                    db.sell_item(ctx.author.id, itemname, sellprice)
+                    await ctx.send(f"You sold the item for {sellprice} gold.")
+                else:                     #if item exists but isn't in the inventory
+                    await ctx.send("You don't have that item in your inventory in order to sell it.")
+            else:                 #if item doesn't exist at all
+                await ctx.send("That item doesn't exist in the store.")
+        except Exception as e:
+            print("store.py, sell: ", e)
 
     @commands.command(brief = "Check how much gold and cheese you own.")
     async def gold(self, ctx):
         try:
-            users = open_json("users.json")
-            id = str(ctx.author.id)
-            if id in users.keys():
-                authorgold = users[id]["gold"]
-                authorcheese = users[id]["cheese"]
+            user = db.get_user(ctx.author.id)
+
+            if user:
+                authorgold = user["gold"]
+                authorcheese = user["cheese"]
                 await ctx.send(f"**{ctx.author.display_name}** you currently have **``{authorgold}``** gold and ``{authorcheese}`` cheese.")
             else:
                 await ctx.send("""You haven't got any gold yet, try "322 help" and use Quiz commands to earn some.""")
@@ -149,18 +125,19 @@ class Store(commands.Cog):
     @commands.command(brief = "Check your inventory.", aliases = ["inv"])
     async def inventory(self, ctx):         #check inventory
         try:
-            users = open_json("users.json")
-            id = str(ctx.author.id)
-            if id not in users.keys():
+            user = db.get_user(ctx.author.id)
+
+            if not user:
                 await ctx.send("""You haven't got an inventory yet, try "322 help" and use Quiz commands to earn gold and buy items!""")
                 return
-            str_itemlist = users[id]["items"]         #get list of items the user has(they're integers)
+
+            str_itemlist = db.get_user_inventory(ctx.author.id)      #get list of items the user has(they're integers)
+            str_itemlist = [tup[1] for tup in str_itemlist]
+
             if len(str_itemlist) == 0:              #if inventory is empty
                 await ctx.send("Your inventory is empty, try 322 buy to purchase items.")
             else:
-                indexes = take_index(storevalues, str_itemlist)         #take the indexes the available items inside the list of all store items
-                inventory = [storekeys[i] for i in indexes]     #create the actual list of strings of available inventory items
-                items_listed = "``, ``".join(inventory)         #create a string to be put into the message
+                items_listed = "``, ``".join(str_itemlist)         #create a string to be put into the message
                 await ctx.send(f"You have ``{items_listed}`` in your inventory.")
         except Exception as e:
             print("store.py, inv: ", e)
@@ -168,46 +145,50 @@ class Store(commands.Cog):
 
     @commands.command(brief = "Give someone cheese.", aliases = ["give"])
     async def givecheese(self, ctx, reciever: discord.Member, amount:int):
-        users = open_json("users.json")
-        giver = str(ctx.author.id)          #obtain ids of the cheese giver and reciever
-        reciever = str(reciever.id)
-        if giver == reciever:
-            await ctx.send("Nice try.")
-        elif amount <= 0:
-            await ctx.send("That amount won't work.")
-        elif giver not in users.keys():
-            await ctx.send("You haven't got any cheese yet.")
-        elif users[giver]["cheese"] < amount:
-            await ctx.send("You haven't got that much cheese.")
-        elif reciever not in users.keys():
-            await ctx.send("That user doesn't have an inventory yet.")
-        else:
-            users[giver]["cheese"] = users[giver]["cheese"] - amount
-            users[reciever]["cheese"] = users[reciever]["cheese"] + amount
-            await ctx.send(f"You have successfully transferred {amount} cheese!")
-            save_json("users.json", users)
+        try:
+            giver = str(ctx.author.id)          #obtain ids of the cheese giver and reciever
+            reciever = str(reciever.id)
+
+            if giver == reciever:
+                await ctx.send("Nice try.")
+            elif amount == 0:
+                await ctx.send("What?")
+            elif amount < 0:
+                await ctx.send("Are you trying to snatch cheese?.")
+            elif giver not in users.keys():
+                await ctx.send("You haven't got any cheese yet.")
+            elif giver["cheese"] < amount:
+                await ctx.send("You haven't got that much cheese.")
+            elif not reciever:
+                await ctx.send("That user doesn't have an inventory yet.")
+            else:
+                db.transfer_cheese(giver, reciever, amount)
+                await ctx.send(f"You have successfully transferred {amount} cheese!")
+        except Exception as e:
+            print("store.py, givecheese: ", e)
 
     @commands.command(brief = "Delete your stats.")
     async def clearstats(self, ctx):
-        users = open_json("users.json")
-        await ctx.send('Are you sure you want to **CLEAR ALL** your gold and your entire inventory? Type "Confirm" to finalize')
-        def check(m):
-            return m.channel == ctx.channel and m.author == ctx.author		#checks if the reply came from the same person in the same channel
         try:
-            msg = await self.bot.wait_for("message", check=check, timeout=30)
-        except asyncio.TimeoutError:		#If too late
-            await ctx.send("Stat clear **cancelled.**")
-        else:
-            if msg.content == "Confirm":
-                id = str(ctx.author.id)
-                if id in users.keys():
-                    users.pop(id)
-                    save_json("users.json", users)
-                    await ctx.send("Your stats have been **successfully deleted.**")
-                else:
-                    await ctx.send("There was nothing to clear.")
+            await ctx.send('Are you sure you want to **CLEAR ALL** your gold and your entire inventory? Type "Confirm" to finalize')
+            def check(m):
+                return m.channel == ctx.channel and m.author == ctx.author		#checks if the reply came from the same person in the same channel
+            try:
+                msg = await self.bot.wait_for("message", check=check, timeout=30)
+            except asyncio.TimeoutError:		#If too late
+                await ctx.send("Stat clear **cancelled.**")
             else:
-                await ctx.send("Stat clear has been **cancelled.**")
+                if msg.content == "Confirm":
+                    user = db.get_user(ctx.author.id)
+                    if user:
+                        db.delete_user(ctx.author.id)
+                        await ctx.send("Your stats have been **successfully deleted.**")
+                    else:
+                        await ctx.send("There was nothing to clear.")
+                else:
+                    await ctx.send("Stat clear has been **cancelled.**")
+        except Exception as e:
+            print("store.py, clearstats: ", e)
 
     @buy.error
     async def buyerror(self, ctx, error):

@@ -1,0 +1,347 @@
+#	Question	Question Type	QuestionTypeId	Answer	AnswerType	AnswerTypeId	SecondaryAnswers	QuestionImage
+1	What is Dark Seer's ultimate ability?	Text	1	Wall of Replica	Single answer + alt spellings	2	vacuum	
+2	What is Arteezy's real name?	Text	1	Artour Babaev, Artour	Single answer + alt spellings	2		
+3	What year was the 7.00 update released?	Text	1	2016	Single answer	1		
+4	Who is Mogul Khan?	Text	1	Axe	Single answer	1		
+5	Which debuff can Orchid Malevolence cause to its target?	Text	1	Silence	Single answer	1		
+6	Except pudge, which other hero was needed to perform a fountain hook in DotA 2?	Text	1	Chen	Single answer	1		
+7	Which team won TI4?	Text	1	Newbee	Single answer	1		
+8	According to the lore, which hero took part in destroying Anti-mage's home village?	Text	1	Undying	Single answer + alt spellings	2	dirge	
+9	Which hero can spawn treants?	Text	1	Nature's Prophet	Single answer + alt spellings	2	furion, np	
+10	How much gold does an Aghanim's scepter cost?	Text	1	4200	Single answer + alt spellings	2	4.2k	
+11	Which item can be upgraded 4 times?	Text	1	Dagon	Single answer	1		
+12	Name a hero who wears goggles.	Text	1	Sniper, Tinker, Snapfire, Gyrocopter, Batrider	Multiple valid answers	3	gyro	
+13	Which item burns mana on each hit?	Text	1	Diffusal Blade, Disperser	Multiple valid answers	3	diffusal	
+14	"Which hero has the ability ""Diabolic Edict""?"	Text	1	Leshrac	Single answer	1		
+15	Which hero has the highest base damage?	Text	1	Treant Protector	Single answer + alt spellings	2	treant	
+16	Which hero has the highest intelligence gain?	Text	1	Pugna	Single answer	1		
+17	What's invokers name?	Text	1	Carl	Single answer	1		
+18	What does Dragon knight call his sword?	Text	1	Wyrmblade	Single answer	1		
+19	Which spell replaced Tusk's Frozen Sigil?	Text	1	Tag Team	Single answer	1		
+20	Which hero resembles a watermelon?	Text	1	Tidehunter	Single answer + alt spellings	2	watermelon, tide	
+21	What's the name of the Goddess of the Moon?	Text	1	Selemene	Single answer	1		
+22	༼ つ ◕_◕ ༽つ GIVE	Text	1	DIRETIDE	Single answer	1		
+23	Which patch introduced neutral items?	Text	1	7.23	Single answer	1		
+24	What is Warlocks third ability called?	Text	1	Upheaval	Single answer	1		
+25	Name a hero that has more than two eyes on one head.	Text	1	Broodmother, Sand King, Venomancer, Medusa	Multiple valid answers	3	brood, veno, banana, dusa	
+26	How many intelligence heroes are melee?	Text	1	3  (only ogre magi currently)	Single answer + alt spellings	2	three	
+27	Name a hero that rides a horse.	Text	1	Chaos Knight, Keeper of the Light, Abaddon	Multiple valid answers	3	ck, kotl, ezalor	
+28	How much gold does a Reaver cost?	Text	1	2800	Single answer	1		
+29	"Which hero has an ability named ""Essence Flux""?"	Text	1	Outworld Destroyer (innate ability now)	Single answer + alt spellings	2	outworld devourer, od, obsidian destroyer	
+30	Which God does Omniknight worship?	Text	1	Omniscience	Single answer	1		
+31	How many maximum units can Chen take control of with Holy Persuasion? (with talents)	Text	1	8 (4 only now, and no longer has a talent about it)	Single answer + alt spellings	2	eight	
+32	Which hero has the shortest average ability cooldown?	Text	1	Bristleback	Single answer + alt spellings	2	bb, bristle	
+33	Which ability allows you to steal gold?	Text	1	Jinada	Single answer	1		
+34	According to the lore, which hero patrols the Narrow Maze?	Text	1	Razor	Single answer	1		
+35	Name a hero voiced by Gary Schwartz.	Text	1	Lich, Pugna, Shadow Shaman, Sniper	Multiple valid answers	3	shaman	
+36	Name a hero voiced by John Patrick Lowrie.	Text	1	Dark Seer, Earthshaker, Pudge, Storm Spirit, Ancient Apparition, Shadow Fiend, Doom	Multiple valid answers	3	ds, shaker, aa, sf, nevermore	
+37	Which hero is also known as The Nightcrawler?	Text	1	Slark	Single answer	1		
+38	What ability does Enchantress gain by acquiring an Aghanim's scepter?	Text	1	Sproink (Little Friends now, sproink is shard)	Single answer	1		
+39	Name an ability that drains a PERCENTAGE of the targets' mana	Text	1	Sinister Gaze, Fiend's grip	Multiple valid answers	3		
+40	Name an active ability that requires no mana or health to cast	Text	1	Phase Shift, Chakra Magic, Tempest Double, M.A.D. (Techies shard)	Multiple valid answers	3	puck out	
+41	What is Earth Spirit's name?	Text	1	Kaolin	Single answer	1		
+42	According to the lore, which hero was rewarded with the belt of Omexe?	Text	1	Centaur Warrunner	Single answer + alt spellings	2	centaur, cent	
+43	Name a hero that throws javelins or spears as their basic attack.	Text	1	Huskar, Enchantress	Multiple valid answers	3	ench	
+44	"Which hero has the voiceline ""Better to run than curse the road""?"	Text	1	Clinkz	Single answer + alt spellings	2	bone fletcher	
+45	Which professional player made the 6 Million dollar Echo slam?	Text	1	UNiVeRsE	Single answer	1		
+46	"How many heroes can be referred to as ""ES""?"	Text	1	3	Single answer + alt spellings	2	three	
+47	"Name one of the heroes released with the ""Dueling fates""(7.07) update."	Text	1	Dark Willow, Pangolier	Multiple valid answers	3	mireska, pango	
+48	Which hero has been in the most amount of matches?	Text	1	Pudge	Single answer	1		
+49	Name a hero with a hook.	Text	1	Timbersaw, Clockwerk, Pudge	Multiple valid answers	3	rizzrack, timber, rattletrap	
+50	Fill in the blank: ____ gonna have your mana.	Text	1	Lich	Single answer	1		
+51	Name an ability that takes effect when the target enemy moves	Text	1	Solar Bind, Rupture	Multiple valid answers	3		
+52	What was the prize pool for the victor at TI1?(in American dollars)	Text	1	One Million	Single answer + alt spellings	2	million, 1m, 1million, 1 000 000	
+53	Which professional team has the record for the longest losing streak?	Text	1	B8	Single answer + alt spellings	2	bait	
+54	Which non-ultimate ability has the longest cooldown?	Text	1	Metamorphosis	Single answer	1		
+55	What is blink dagger's max blink range?	Text	1	1200 (it's always 1200, no need for max in question)	Single answer + alt spellings	2	1.2k	
+56	How many heroes are in DotA 2 currently?	Text	1	124 (128)	Single answer	1		
+57	Which neutral item can reset item cooldowns?	Text	1	"Ex Machina (item is no longer in the pool, either remove question or add ""used to"""	Single answer	1		
+58	Which hero has 2 seperate ultimate abilities?	Text	1	Dark Willow, Tinker, Dazzle	Multiple valid answers	3	willow, mireska	
+59	What's Gabe Newell's favorite hero?	Text	1	Sand King	Single answer + alt spellings	2	sk, crixalis	
+60	Name a hero who can speak Ozkavosh(The demon language).	Text	1	Shadow Demon, Shadow Fiend, Doom, Terrorblade (Legion Commander with Arcana)	Multiple valid answers	3	sd, sf, nevermore, tb	
+61	"Which professional player caused the ""322 meme""?"	Text	1	Solo	Single answer	1		
+62	Who commands The Bronze legion?	Text	1	Legion Commander	Single answer + alt spellings	2	tresdin, legion, lc	
+63	Fill in the blank: ____ need no armor.	Text	1	Wolves	Single answer	1		
+64	What's the most expensive item?	Text	1	Dagon 5	Single answer + alt spellings	2	dagon five	
+65	Name an item that drops when its holder dies.	Text	1	Divine Rapier, Gem of True Sight	Multiple valid answers	3	rapira, rapier, gem	
+66	Name an item that can be assembled at the secret shop alone.	Text	1	Soul Booster, Divine Rapier, Eye of Skadi, Scythe of Vyse, Perseverance, Moon Shard	Multiple valid answers	3	rapira, rapier, skadi, scythe, sheepstick	
+67	Name an item that amplifies healing(incoming or outgoing).	Text	1	Holy Locket, Heart of Tarrasque	Multiple valid answers	3	heart, tarrasque	
+68	What other nickname does the youtuber Trymike4instance use?	Text	1	mav	Single answer	1		
+69	Who's Pugna's pet?	Text	1	Viper	Single answer + alt spellings	2	netherdrake	
+70	Which hero's all 3 attributes are equal?	Text	1	Bane	Single answer	1		
+71	What's the fifth rank medal?	Text	1	Legend	Single answer	1		
+72	How else is The Ancient often referred as?	Text	1	The Throne	Single answer	1		
+73	Which hero is a pope?	Text	1	Necrophos	Single answer + alt spellings	2	necro, necrolyte	
+74	What's the name of the wisp Keeper of the Light summons with Will-O-Wisp??	Text	1	Ignis Fatuus	Single answer	1		
+75	Which hero can bring a teammate to himself anywhere from the map?	Text	1	Keeper of the Light (no longer has this ability)	Single answer + alt spellings	2	kotl	
+76	Which spell does Quas-Quas-Wex invoke?	Text	1	Ghost Walk	Single answer	1		
+77	Name a hero with a flying mount.	Text	1	Batrider	Single answer	1		
+78	Which hero has the lowest agility gain?	Text	1	Tiny	Single answer	1		
+79	Which passive skill heals the hero with a fixed amount of HP on each hit?	Text	1	Ransack	Single answer	1		
+80	What did Naga Siren say at Tidehunter's grave?	Text	1	RIP Tide	Single answer	1		
+81	Name a hero who uses their voice in battle.	Text	1	Beastmaster, Queen of Pain, Naga Siren	Multiple valid answers	3	qop, akasha, naga	
+82	Which hero works for the Flayed Twins?	Text	1	Bloodseeker	Single answer + alt spellings	2	bs	
+83	What nickname is the professional player Daryl Koh Pei Xiang known as?	Text	1	iceiceice	Single answer + alt spellings	2	ice3	
+84	Which hero is notorious for having a long head?	Text	1	Dark Seer	Single answer + alt spellings	2	ds	
+85	How many DotA heroes are arthropods?	Text	1	4	Single answer + alt spellings	2	four	
+86	Which color signifies mystery or The Unknown in the world of DotA?	Text	1	Purple	Single answer	1		
+87	Which unit has this ability?	Image	2	Spiderite	Single answer + alt spellings	2	spiderling	Poison_Sting.png
+88	"Which hero says ""Come back and die again."" after killing an enemy?"	Text	1	Troll Warlord	Single answer + alt spellings	2	troll, jah'rakal	
+89	Which hero has the slowest basic attack projectile?	Text	1	Winter Wyvern	Single answer + alt spellings	2	ww, wyvern	
+90	Which channelling ability has the longest duration?	Text	1	Tornado	Single answer	1		
+91	"Which neutral creeps are sometimes referred to as ""Tomato"" and ""Potato""?"	Text	1	Hellbears	Single answer + alt spellings	2	hellbear	
+92	Which neutral Satyr can cast purge?	Text	1	Satyr Banisher	Single answer + alt spellings	2	banisher	
+93	Which non-hero unit has the Fireball ability?	Text	1	Ancient Black dragon	Single answer + alt spellings	2	black dragon	
+94	Which hero has the highest base attack range?	Text	1	Techies	Single answer	1		
+95	Which item can assembled in mutliple different ways?	Text	1	Power Treads	Single answer + alt spellings	2	treads	
+96	Name a hero who has lower vision during the day.	Text	1	Night Stalker	Single answer + alt spellings	2	balanar	
+97	Which item grants True Strike?	Text	1	Witch Blade, Enchanted Quiver	Multiple valid answers	3		
+98	Which ability counters Shallow Grave?	Text	1	Culling Blade	Single answer	1		
+99	Which hero can steal its targets movement and attack speed?	Text	1	Visage	Single answer	1		
+100	Name a hero with an odd number of natural horns.	Text	1	Magnus, Tiny	Multiple valid answers	3		
+101	Which hero is the son of a Vigil Knight?	Text	1	Sven	Single answer	1		
+102	Which hero has a 17% chance to bash on hit?(Without talents)	Text	1	Spirit breaker	Single answer + alt spellings	2	bara, sb, barathrum	
+103	How many Reactive Armor stacks can Timbersaw have at max?(With talents)	Text	1	46	Single answer + alt spellings	2	forty six	
+104	Which hero can have a bonus while on the river?	Text	1	Slardar	Single answer	1		
+105	What's Underlords name?	Text	1	Vrogros	Single answer	1		
+106	Except Phoenix and Tinker, which hero can reset their cooldowns without a Refresher Orb?	Text	1	Clockwerk, Rubick, Phantom Assassin	Multiple valid answers	3	rattletrap, pa	
+107	What is Snapfire to Timbersaw?(as a relative)	Text	1	Aunt	Single answer	1		
+108	Which hero is oldest by age?	Text	1	Void Spirit	Single answer	1		
+109	Which hero says only 4 words on each voiceline?	Text	1	Ember Spirit	Single answer + alt spellings	2	ember, xin	
+110	Which passive talent allows the hero to completely avoid any type of damage?	Text	1	Backtrack	Single answer	1		
+111	Name a hero with a passive ultimate ability.	Text	1	Ogre Magi, Phantom Lancer, Drow Ranger, Phantom Assassin, Dazzle, Riki, Wraith King, Tiny, BristleBack, Meepo	Multiple valid answers	3	drow, lancer, pl, pa, rikimaru, wk, bb	
+112	What type of damage do Psi Blades deal?	Text	1	Pure	Single answer	1		
+113	Which hero can speak in reverse?	Text	1	Spectre	Single answer	1		
+114	Which city hosted TI8?	Text	1	Vancouver	Single answer	1		
+115	Name a point-target ability that disarms.	Text	1	Fate's edict	Single answer	1		
+116	"Which hero has the voiceline ""Consider thyself purified""?"	Text	1	Anti-Mage	Single answer + alt spellings	2	magina, am	
+117	How many extra souls can Shadow Fiend keep by acquiring an Aghanim's Scepter?	Text	1	5	Single answer + alt spellings	2	five	
+118	Which hero leaves a very clear trail of footprints behind them?	Text	1	Terrorblade	Single answer + alt spellings	2	tb	
+119	Name a hero who has wings but doesn't use it for flight.	Text	1	Doom, Terrorblade, Queen of Pain, Shadow Fiend	Multiple valid answers	3	tb, qop, akasha, sf, nevermore	
+120	Name a hero based on ancient mythology.	Text	1	Zeus, Medusa, Mars, Phoenix, Monkey King	Multiple valid answers	3	gorgon, icarus, mk	
+121	At max how many attacks does it take to destroy Phoenix' Supernova?(With talents and Aghanim's Scepter)	Text	1	16	Single answer + alt spellings	2	sixteen	
+122	Which professional player's face is a Twitch emote?	Text	1	Dendi	Single answer + alt spellings	2	danylo ishutin, danylo	
+123	Which hero has been to hell and back and back to hell and back?	Text	1	Lion	Single answer	1		
+124	Who does ODpixel usually cast competitive games with?	Text	1	Fogged	Single answer	1		
+125	Which hero does SirActionSlacks despise?	Text	1	Windranger	Single answer + alt spellings	2	wr, windrunner	
+126	How many TI's have been hosted in the USA?	Text	1	6	Single answer + alt spellings	2	six	
+127	Which professional team has been in the most amount of TI finals?	Text	1	Natus Vincere	Single answer + alt spellings	2	navi	
+128	Which year did the first Compendium/BattlePass come out?	Text	1	2013	Single answer	1		
+129	"Which hero has the response ""Oh, look at it go!""?"	Text	1	Witch Doctor	Single answer + alt spellings	2	wd	
+130	Which tournament was the first to have a True Sight documentary?	Text	1	Kiev Major	Single answer	1		
+131	Which hero was the first to get an arcana?	Text	1	Lina	Single answer	1		
+132	Which professional player is notorious for playing Nature's Prophet and Lone Druid?	Text	1	AdmiralBulldog	Single answer + alt spellings	2	bulldog, bulldong	
+133	"Which hero has the voiceline ""If killing you is wrong, I don't want to be right.""?"	Text	1	Dazzle	Single answer	1		
+134	Which hero fears trees?	Text	1	Timbersaw	Single answer + alt spellings	2	timber, rizzrack	
+135	Which player was the first to surpass 9000 mmr?	Text	1	Miracle-	Single answer	1		
+136	"Which hero has ""Riki was here"" carved onto them?"	Text	1	Treant Protector	Single answer + alt spellings	2	treant	
+137	How much gold can Cheese be sold for?	Text	1	500	Single answer + alt spellings	2	five hundred, 0.5k	
+138	Which hero is known as the Arsenal Magus?	Text	1	Invoker	Single answer + alt spellings	2	carl, invo	
+139	In what year did Skeleton King become a wraith?	Text	1	2013	Single answer	1		
+140	Name one of the Fundamentals.	Text	1	Keeper of the Light, Enigma, Io, Chaos Knight	Multiple valid answers	3	kotl, ezalor, ck, wisp	
+141	Name an ability that can turn day into night or night into day.	Text	1	Supernova, Eclipse, Dark Ascension	Multiple valid answers	3		
+142	Name a hero with a talent that increases Night Vision.	Text	1	Spirit Breaker	Single answer + alt spellings	2	bara, barathrum	
+143	Name an item that can grant bonus Night Vision.	Text	1	Moon Shard, Vampire Fangs	Multiple valid answers	3		
+144	How many heroes use a gun as a weapon?	Text	1	3	Single answer + alt spellings	2	three	
+145	Name an item that the courier can't pick up from the ground.	Text	1	Aegis of the Immortal, Divine Rapier	Multiple valid answers	3	rapier, rapira, aegis	
+146	Name an item that can increase attack range.	Text	1	Broom Handle, Enchanted Quiver, Hurricane Pike, Grove Bow, Dragon Lance, Penta-Edged Sword, Telescope	Multiple valid answers	3		
+147	How many methods of hex exist?	Text	1	5	Single answer + alt spellings	2	five	
+148	Name an ability that can cause the hypnosis debuff on an enemy.	Text	1	Sinister Gaze, Aether Remnant, Will-O-Wisp	Multiple valid answers	3	ignis fatuus	
+149	Who's that handsome devil?	Text	1	Storm Spirit	Single answer + alt spellings	2	storm	
+150	Name a NON-Ultimate ability that has global cast range.	Text	1	Living armor, Rocket Flare, Sunstrike, Cataclysm, Teleportation, Nimbus, Divine Favor, Charge of Darkness	Multiple valid answers	3	charge	
+151	What year did DotA2 switch to the Source 2 engine?	Text	1	2015	Single answer	1		
+152	What color is Sange and Yasha?	Text	1	Orange	Single answer	1		
+153	Name an item that reduces cooldowns.	Text	1	Octarine Core, Quickening Charm, Spell Prism	Multiple valid answers	3	octarine	
+154	Who's both accurate and precise?	Text	1	Clockwerk	Single answer + alt spellings	2	rattletrap, clock	
+155	"Which hero has the voiceline ""No room to swing a cat in this crowd.""?"	Text	1	Kunkka	Single answer	1		
+156	Which hero was the first to be released exclusively in DotA 2?	Text	1	Monkey King	Single answer + alt spellings	2	mk, makaka	
+157	What is the name of Chaos Knight's horse?	Text	1	Armageddon	Single answer	1		
+158	Which hero did Pudge barely win the arcana vote against in 2018?	Text	1	Rubick	Single answer	1		
+159	Name a hero of the Oglodi race.	Text	1	Warlock, Axe, Disruptor, Lifestealer	Multiple valid answers	3	naix	
+160	Name a hero who has multiple charges of their ultimate ability.(Without Aghanim's Scepter or talents)	Text	1	Ember Spirit, Void Spirit	Multiple valid answers	3	xin, inai, ember	
+161	Who is Rubick's father?	Text	1	Aghanim	Single answer	1		
+162	Name one of the two heroes who were main characters of Wronchi's DotA animations.	Text	1	Rubick, Enigma	Multiple valid answers	3		
+163	What type of damage do proximity mines deal?	Text	1	Magical	Single answer + alt spellings	2	magic	
+164	Which hero has a cosmetic set dedicated to Ixmike88?	Text	1	Crystal Maiden	Single answer + alt spellings	2	cm, rylai	
+165	Name a mountless knight.	Text	1	Dragon Knight, Omniknight, Sven	Multiple valid answers	3	dk, rogue knight	
+166	Who was the youngest professional player to play in a TI?	Text	1	SumaiL	Single answer	1		
+167	How many seconds does it take to teleport to an outpost for the first player?	Text	1	6	Single answer + alt spellings	2	six, too many	
+168	Which item has a Strong Dispel?	Text	1	Aeon Disk	Single answer	1		
+169	How many minutes is the buyback cooldown?	Text	1	8	Single answer + alt spellings	2	eight	
+170	How much max health does Roshan gain every minute?	Text	1	115	Single answer	1		
+171	Which item can decrease an enemy's attack speed?	Text	1	Shiva's Guard, Solar Crest	Multiple valid answers	3	shiva	
+172	What type of incoming damage does Vanguard decrease?	Text	1	Physical	Single answer	1		
+173	Which type of debuff disables only the use of items?	Text	1	Mute	Single answer	1		
+174	Name an ability that increases Status Resistance.	Text	1	Bulldoze, Enrage, Morph, Rampage, Defence Matrix	Multiple valid answers	3		
+175	According to the lore, which item was made for Thor?	Text	1	Mjollnir	Single answer	1		
+176	What else is Scythe of Vyse often called?	Text	1	Sheepstick	Single answer + alt spellings	2	hex	
+177	Which hero gains a new ability with an Aghanim's Scepter to go into ethereal form?	Text	1	Leshrac	Single answer + alt spellings	2	lesh	
+178	Which type of gold do last hits give?	Text	1	Unreliable	Single answer	1		
+179	How many charges do Drums of Endurance have?	Text	1	8	Single answer + alt spellings	2	eight	
+180	How much damage per second does Armlet of Mordiggian deal to it's owner while active?	Text	1	45	Single answer + alt spellings	2	forty five	
+181	How much gold does Smoke of Deceit cost?	Text	1	50	Single answer + alt spellings	2	fifty	
+182	How much magic damage can an Infused Raindrop block?	Text	1	120	Single answer	1		
+183	Name an item that can be assembled using a Blight Stone.	Text	1	Medallion of Courage, Desolator, Orb of Corrosion	Multiple valid answers	3	medallion, deso	
+184	What type of damage does a Javelin deal?	Text	1	Magical	Single answer + alt spellings	2	magic	
+185	How much movement speed do units controlled with a Helm of the Dominator have?	Text	1	380	Single answer	1		
+186	Which item is made with two Cornucopias?	Text	1	Refresher Orb	Single answer + alt spellings	2	refresher	
+187	"Which item has an ability called ""Combo Breaker""?"	Text	1	Aeon Disk	Single answer	1		
+188	Which item can be used on an ally for a Basic Dispel?	Text	1	Lotus Orb, Wind Waker	Multiple valid answers	3	lotus	
+189	Which item can deal magical damage to buildings?	Text	1	Meteor Hammer, Dragon Scale, Orb of Corrosion	Multiple valid answers	3		
+190	"Which item is an ""upgrade"" of Crystalys?"	Text	1	Daedalus	Single answer + alt spellings	2	daed	
+191	Name an item that gives evasion.	Text	1	Radiance, Talisman of Evasion, Butterfly, Heaven's Halberd	Multiple valid answers	3	talisman, halberd	
+192	Which item can cause a Break debuff on the enemy?	Text	1	Silver Edge	Single answer	1		
+193	Vhich item's description is vritten in this manner?	Text	1	Orb of Venom	Single answer	1		
+194	Name an ability that can spawn a tree.	Text	1	Sprout, Acorn Shot	Multiple valid answers	3		
+195	How many Power-Up runes are there?	Text	1	7	Single answer + alt spellings	2	seven	
+196	What's the Movement Speed Cap for most units?	Text	1	550	Single answer	1		
+197	Which ability has the longest cast point?	Text	1	Teleportation	Single answer	1		
+198	Name an unit that deals bonus damage to buildings.	Text	1	Earth, Siege Creep, Spirit Bear	Multiple valid answers	3	catapult	
+199	How many heroes can deny themselves?	Text	1	2	Single answer + alt spellings	2	two	
+200	Name an ability that allows players to deny allies.	Text	1	Venemous Gale, Shadow Strike, Doom	Multiple valid answers	3	gale	
+201	How many abilities can grant cleave?	Text	1	3	Single answer + alt spellings	2	three	
+202	What's the maximum movement speed a courier can have?	Text	1	870	Single answer	1		
+203	Name a hero with a chance based bash.	Text	1	Faceless Void, Spirit Breaker	Multiple valid answers	3	faceless, bara, sb, barathrum	
+204	"Which hero shouts ""I SAID GOOD DAY SIR!""?"	Text	1	Axe	Single answer + alt spellings	2	mogul khan	
+205	Which actor voices Pangolier?	Text	1	Phil Lamarr	Single answer	1		
+206	Name an ability that increases the caster's attack damage.	Text	1	Enchant Totem, Fade Bolt, Refraction	Multiple valid answers	3		
+207	What's the name of Luna's lion?	Text	1	Nova	Single answer	1		
+208	Fill in the blank: Failure is just another kind of success. The ____ ___.	Text	1	wrong kind	Single answer	1		
+209	Which hero is named Kaldr?	Text	1	Ancient Apparition	Single answer + alt spellings	2	aa	
+210	Name a hero who is able to make a greater use of Hand of Midas than others.	Text	1	Dazzle, Ogre magi, Arc Warden	Multiple valid answers	3	zet	
+211	Fill in the blank: You die as you lived: ___ and ignorant.	Text	1	insipid	Single answer	1		
+212	Which Goddess was Bane born from?	Text	1	Nyctasha	Single answer	1		
+213	"Which hero has the voiceline: ""Keepin my knees in the breeze.""?"	Text	1	Batrider	Single answer	1		
+214	Name a hero who has the same voice actor as The Shopkeeper.	Text	1	Anti-mage, Slardar, Necrophos, Warlock, Clockwerk, Beastmaster	Multiple valid answers	3	am, necro, rattletrap	
+215	"Which hero has the voiceline: ""Lie down... have a cookie.""?"	Text	1	Bloodseeker	Single answer + alt spellings	2	bs	
+216	"Which hero uses this voiceline upon respawning: ""Screw business, it just got personal.""?"	Text	1	Bounty Hunter	Single answer + alt spellings	2	gondar, bh	
+217	"Which ultimate creates the ""boozin' buddies""?"	Text	1	Primal Split	Single answer	1		
+218	Fill in the blank: Where ride the ___, death shall follow.	Text	1	horsemen	Single answer	1		
+219	Who's as swift as the wolves of Icewrack?	Text	1	Crystal Maiden	Single answer + alt spellings	2	cm, rylai	
+220	What does Dark Willow call her pet wisp?	Text	1	Jex	Single answer	1		
+221	Name a hero with a bipedal mount.	Text	1	Alchemist, Disruptor	Multiple valid answers	3		
+222	Fill in the blank: Steel wins battles, ___ wins wars.	Text	1	gold	Single answer	1		
+223	"Which hero has the voiceline: ""I know I should respect the dead, but first you have to earn it.""?"	Text	1	Drow Ranger	Single answer + alt spellings	2	drow, traxex	
+224	Who's the last Worldsmith?	Text	1	Elder Titan	Single answer	1		
+225	"Which hero has the voiceline: ""Hey, I'm a predator""?"	Text	1	Enchantress	Single answer	1		
+226	Fill in the blank: If ___ cannot escape me, what hope have you?	Text	1	light	Single answer	1		
+227	"Which hero has this voiceline upon killing an enemy: ""I have seen the future, you're not in it.""?"	Text	1	Faceless Void	Single answer	1		
+228	Name a hero with no audible voicelines.	Text	1	Io, Phoenix, Marci, Primal Beast	Multiple valid answers	3	wisp, icarus, pb, primal	
+229	How else is Gyrocopters Rocket Barrage often called?	Text	1	Raining Hell	Single answer	1		
+230	Name a hero who can benefit from being low on health.	Text	1	Huskar, Terrorblade	Multiple valid answers	3	tb	
+231	Fill in the blank: There's a fine line between ___ and stupidity.	Text	1	bravery	Single answer	1		
+232	What's Lifestealers race?	Text	1	Oglodi	Single answer	1		
+233	Fill in the blank: It's not the heat, it's the _____.	Text	1	humiliation	Single answer	1		
+234	Name a hero that gains extra ability charges by acquiring an Aghanim's Scepter	Text	1	Bloodseeker, Shadow Demon, Slark, Brewmaster, Dark Seer, Ember Spirit, Outworld Destroyer, Void Spirit, Windrunner	Multiple valid answers	3	sd, ds, ember, xin, od, inai, windranger, wr	
+235	Name a hero that can change between melee and ranged attacks.	Text	1	Troll Warlord, Terrorblade, Dragon Knight, Lone Druid	Multiple valid answers	3	troll, tb, dk	
+236	"Who has the voiceline: ""Let my beauty still your breath.""?"	Text	1	Medusa	Single answer + alt spellings	2	dusa, gorgon	
+237	"Which hero has the voiceline: ""It was not luck, but skill!""?"	Text	1	Mirana	Single answer + alt spellings	2	potm	
+238	Fill in the blank: ___ by day, demon by night.	Text	1	Devil	Single answer	1		
+239	Fill in the blank: Nyx, Nyx, ___, Nyx.	Text	1	Nyx	Single answer	1		
+240	Fill in the blank: Running's not as fun as ____. Not one bit fun.	Text	1	hitting	Single answer	1		
+241	"Who has the voiceline: ""Like the past, I'm never dead. I'm not even past.""?"	Text	1	Oracle	Single answer	1		
+242	Fill in the blank: Good news travels slowly, bad news has ___.	Text	1	wings	Single answer	1		
+243	Fill in the blank of Pugna's voiceline: Who needs a blade when you have ____?	Text	1	oblivion	Single answer	1		
+244	Which metal is a great conductor?	Text	1	Gold	Single answer	1		
+245	Which hero is a satyr?	Text	1	Riki	Single answer + alt spellings	2	rikimaru	
+246	Name a hero voiced by Barry Dennen.	Text	1	Rubick, Phantom Lancer, Chaos Knight	Multiple valid answers	3	pl, ck	
+247	Which TI final ended with a 3:0 score?	Text	1	TI7	Single answer + alt spellings	2	7, seven	
+248	Which hero has slain a Sea Dragon?	Text	1	Slardar	Single answer	1		
+249	"Who has the voiceline ""Your body was a cage, I just let you free!""?"	Text	1	Slark	Single answer + alt spellings	2	nightcrawler	
+250	Fill in the blank: My trigger finger is itching for _____.	Text	1	vengeance	Single answer	1		
+251	"Who has the voiceline: ""It was but a scratch.""?"	Text	1	Sven	Single answer + alt spellings	2	rogue knight	
+252	Name one of the goblins of Techies.	Text	1	Squee, Spleen, Spoon	Multiple valid answers	3		
+253	Which hero is from the hell of hells?	Text	1	Terrorblade	Single answer + alt spellings	2	tb	
+254	"Which hero has the voiceline: ""It's probably not a problem, probably.""?"	Text	1	Tinker	Single answer + alt spellings	2	dr. kleiner	
+255	Fill in the blank: ___ are not so good with motion, you know.	Text	1	trees	Single answer	1		
+256	Who's also known as the Snowball from Cobalt?	Text	1	Tusk	Single answer + alt spellings	2	tuskar, ymir	
+257	Which hero loves gummy vitamins?	Text	1	Undying	Single answer + alt spellings	2	dirge	
+258	Which hero transformed from a Herbalist to The Deathbringer?	Text	1	Venomancer	Single answer + alt spellings	2	veno	
+259	Fill in the blank: Shuttle and loom, I weave your ___.	Text	1	doom	Single answer	1		
+260	"Which hero has the voiceline: ""Death is my bitch.""?"	Text	1	Wraith King	Single answer + alt spellings	2	wk	
+261	Fill in the blank: You can't run from ___.	Text	1	heaven	Single answer	1		
+262	Which item was removed but is now a neutral item?	Text	1	Ring of Aquila	Single answer + alt spellings	2	aquila	
+263	Which hero was the first to get a custom persona?	Text	1	Invoker	Single answer + alt spellings	2	carl, injoker, invo	
+264	Which hero is a creature of the black mist?	Text	1	Abaddon	Single answer + alt spellings	2	lord of avernus	
+265	What race is Shadow Shaman?	Text	1	Hill Troll	Single answer + alt spellings	2	troll	
+266	Who's Tusk's pub nemesis?	Text	1	Bristleback	Single answer + alt spellings	2	bb, bristle	
+267	Who's the lord of hell?	Text	1	Doom	Single answer + alt spellings	2	lucifer	
+268	Which hero is obsessed with Blink Dagger?	Text	1	Earthshaker	Single answer	1		
+269	Which hero doesn't need to turn around to do any actions?	Text	1	Pangolier	Single answer + alt spellings	2	pango	
+270	Which hero carries this symbol?	Image	2	Treant Protector	Single answer + alt spellings	2	treant	Treant_sym.png
+271	Which hero wears this symbol?	Image	2	Necrophos	Single answer + alt spellings	2	necro	Necro_sym.png
+272	Which hero wears this symbol?	Image	2	Luna	Single answer	1		Luna_sym.png
+273	Which item causes the Maim debuff?	Text	1	Sange, Penta-Edged Sword	Multiple valid answers	3		
+274	Who shares the same ancestors as Clockwerk and Tinker	Text	1	Sniper	Single answer	1		
+275	Which TI1-2 NaVi player is now a successful well-known caster?	Text	1	LightOfHeaveN	Single answer	1		
+276	What was Lich's name before becoming the Lich?	Text	1	Ethreain	Single answer	1		
+277	Which hero cannot sell or drop an Aghanims Scepter after obtaining one?	Text	1	Meepo	Single answer + alt spellings	2	geomancer	
+278	Name a non-neutral item that cannot be sold.	Text	1	Aegis of the Immortal, Gem of True Sight, Divine Rapier	Multiple valid answers	3	aegis, gem, rapier, rapira, tango, tango (shared)	
+279	"Which professional player called his opponent a ""13 mana boy"" on stream?"	Text	1	Puppey	Single answer	1		
+280	Which professional player is known to get cliffed a lot?	Text	1	Arteezy, RTZ	Single answer + alt spellings	2	artour, cliffteezy	
+281	Which caster is also known as the Rap God?	Text	1	ODpixel	Single answer + alt spellings	2	od	
+282	Which professional player is known to have thrown his headset at a monitor?	Text	1	Puppey	Single answer	1		
+283	"Which player said ""MMR is just a number""?"	Text	1	Dendi	Single answer + alt spellings	2	danylo ishutin, danylo	
+284	Which hero never wards?	Text	1	Pugna	Single answer	1		
+285	Which hero sells mayonnaise?	Text	1	Luna	Single answer	1		
+286	What's Tinker's favorite month?	Text	1	March	Single answer	1		
+287	Which ability uses the same audio as reporting a player?	Text	1	Culling Blade	Single answer	1		
+288	Which hero has the shortest name?	Text	1	Io	Single answer + alt spellings	2	wisp	
+289	Which ability can have the most charges?	Text	1	Stone Remnant	Single answer	1		
+290	Which hero has the highest damage talent?	Text	1	Techies	Single answer	1		
+291	Name a hero that can have free pathing.	Text	1	Broodmother, Clockwerk, Batrider, Night Stalker, Nyx Assassin	Multiple valid answers	3	brood, rattletrap, balanar, nyx	
+292	Name an ability that can apply a Break debuff on the target.	Text	1	Doom, Nethertoxin, Nether Strike, Sharpshooter, Demonic Purge	Multiple valid answers	3		
+293	Name a global aura.	Text	1	Arcane Aura, Feral Impulse	Multiple valid answers	3	toxicity	
+294	What ability does Storm Spirit gain by obtaining an Aghanim's shard?	Text	1	Electric Rave	Single answer	1		
+295	How many ways are there to manipulate a hero's model size?	Text	1	5	Single answer + alt spellings	2	five	
+296	How many items require a Buckler to assemble?	Text	1	3	Single answer + alt spellings	2	three	
+297	Which item was found beneath the Fields of Endless Carnage?	Text	1	Blight Stone	Single answer	1		
+298	Which item is a lapis gemstone?	Text	1	Energy Booster	Single answer	1		
+299	Which item did the Demon-Smith Abzidian forge?	Text	1	Demon Edge	Single answer	1		
+300	Which item corrupts the soul of its user?	Text	1	Robe of the Magi	Single answer + alt spellings	2	satanic	
+301	Which item is said to be a tear of Selemene?	Text	1	Moon Shard	Single answer	1		
+302	Who was the Lord of Blight?	Text	1	Atos	Single answer	1		
+303	Which item is made for torturing political criminals?	Text	1	Desolator	Single answer + alt spellings	2	deso	
+304	Which item was constructed to honor Omniscience?	Text	1	Guardian Greaves	Single answer + alt spellings	2	greaves	
+305	Which item is haunted by a vampire?	Text	1	Vladmir's Offering	Single answer + alt spellings	2	vladmir, vlad	
+306	Which item was originally built to protect against the Year Beast?	Text	1	Crimson Guard	Single answer + alt spellings	2	crimson	
+307	Which item was once held by the ancient wyvern riders?	Text	1	Hurricane Pike	Single answer	1		
+308	Which item was forged in the nether reaches?	Text	1	Assault Cuirass	Single answer + alt spellings	2	ac, cuirass	
+309	Which item was guarded by azure dragons?	Text	1	Eye of Skadi	Single answer + alt spellings	2	skadi	
+310	Which item was blessed by the goddess of the hunt?	Text	1	Enchanted Quiver	Single answer	1		
+311	Which neutral item is preserving the remains of an universe?	Text	1	Ex Machina	Single answer	1		
+312	Which neutral item is a creation of the acolytes of the Wyrmforge?	Text	1	Fallen Sky	Single answer	1		
+313	Which item was forged from the metals of a star storm?	Text	1	Meteor Hammer	Single answer	1		
+314	What's Icefrogs favorite fruit?	Text	1	Mango	Single answer	1		
+315	Which panelist was often thought to be Icefrog?	Text	1	Statsman Bruno	Single answer + alt spellings	2	bruno carlucci, bruno	
+316	Complete the sequence: Iron Branch, Circlet, Crown, Diadem, ____.	Text	1	Ultimate Orb	Single answer	1		
+317	Complete the sequence: Slippers of Agility, _____, Blade of Alacrity, Eaglesong.	Text	1	Band of Elvenskin	Single answer	1		
+318	Complete the sequence: Mantle of Intelligence, Robe of the Magi, _____, Mystic Staff.	Text	1	Staff of Wizardry	Single answer	1		
+319	How many charges does Bloodstone lose by dying?	Text	1	3	Single answer + alt spellings	2	three	
+320	How many seconds long is the Glyph of Fortification for buildings?	Text	1	7	Single answer + alt spellings	2	seven	
+321	"Which TI is known for ""Rat DotA""?"	Text	1	TI3	Single answer + alt spellings	2	3, three, third	
+322	Which item has the most expensive recipe?	Text	1	Boots of travel	Single answer + alt spellings	2	tp boots	
+323	Which ability has the highest priority to set day or night?	Text	1	Supernova	Single answer	1		
+324	Name the status effect Ghost Ship gives to allied heroes.	Text	1	Rum Hangover	Single answer	1		
+325	How much extra damage does Dagon deal with each upgrade?	Text	1	100	Single answer + alt spellings	2	one hundred, hundred	
+326	Name a hero with an Armor Corruption talent.	Text	1	Visage, Hoodwink, Phantom Assassin	Multiple valid answers	3	pa	
+327	"Who said the famous words: ""DROP YOUR STICK! DROP YOUR STICK!..""?"	Text	1	Eternal Envy, EE	Single answer + alt spellings	2		
+328	Which spell disables healing and regenerations entirely?	Text	1	Ice Blast	Single answer	1		
+329	Which hero lost their moustache and horse in DotA 2?	Text	1	Legion Commander	Single answer + alt spellings	2	lc, tresdin	
+330	Which hero makes kebab?	Text	1	Magnus	Single answer	1		
+331	Which hero is always being pulled by the moon?	Text	1	Morphling	Single answer	1		
+332	Which item has its cooldown increased with each use?	Text	1	Aeon Disk	Single answer	1		
+333	Which creep resembles a triceratops?	Text	1	Thunderhide	Single answer	1		
+334	Which item gives Prescient aura?	Text	1	Telescope	Single answer	1		
+335	What's the active ability of Diffusal Blade called?	Text	1	Inhibit	Single answer	1		
+336	Which professional player was known for placing bad Chronospheres?	Text	1	LodA	Single answer	1		
+337	Which player was the first to ever play Techies in DotA2?	Text	1	Arteezy	Single answer + alt spellings	2	rtz, artour	
+338	Name an item that passively decreases some stat of the holder.	Text	1	Philosopher's Stone	Single answer	1		
+339	Name an item needs a Recipe to assemble but can be disassembled?	Text	1	Heaven's Halberd, Ethereal Blade	Multiple valid answers	3	halberd, eblade	
+340	Which attack type deals less damage to heroes?	Text	1	Runty	Single answer	1		
+341	Which attack type do siege creeps have?	Text	1	Reinforced	Single answer	1		
+342	Which item requires the most amount of base items to assemble?	Text	1	Helm of the Overlord	Single answer	1		
+343	Which item has an active and cannot be sold	Text	1	Gem of True Sight	Single answer + alt spellings	2	gem	
+344	What's the most expensive item you can disassemble?	Text	1	Octarine Core	Single answer	1		
+345	Which ability reduces cast range?	Text	1	Enfeeble	Single answer	1		
+346	"How many heroes have ""mag"" in their names?"	Text	1	4	Single answer + alt spellings	2	four	

@@ -1,8 +1,10 @@
 import discord
-import os, json, asyncio, itertools
+import os, asyncio, itertools
 import sys, traceback
 from discord.ext import commands
 import quizdata
+from database import db
+from dotenv import load_dotenv
 
 #Adding parent directory to path so cogs can import quizdata
 #print(sys.path)
@@ -11,16 +13,6 @@ sys.path.append(current)
 #print(sys.path)
 
 os.chdir(os.getcwd())
-
-jsondir = os.path.dirname(os.getcwd()) + '/jsonfiles'
-
-def open_json(jsonfile):
-	with open(jsondir + '/' + jsonfile, "r") as fp:
-		return json.load(fp)	#openfunc for jsonfiles
-
-def save_json(jsonfile, name):	#savefunc for jsonfiles
-	with open(jsondir + '/' + jsonfile, "w") as fp:
-		json.dump(name, fp)
 
 def strip_str(text):		#function to remove punctuations, spaces from string and make it lowercase,
 	punctuations = ''' !-;:`'".,/_?'''
@@ -76,11 +68,7 @@ async def on_guild_join(guild):					#sends message in the first usable channel w
 
 @bot.event
 async def on_guild_remove(guild):       #removes server from rngfix.json if bot gets removed
-    rng = open_json("rngfix.json")
-    id = str(guild.id)
-    if id in rng.keys():
-        rng.pop(id)
-        save_json("rngfix.json", rng)
+    db.delete_guild(guild.id)
 
 @bot.command(brief = "An invite to our discord server!")
 async def serverinvite(ctx):             #sends bot information and server invite link to the server
@@ -102,7 +90,9 @@ async def on_command_error(ctx, error):
         raise error
 
 startcogs = ["cogs.quizes", "cogs.store", "cogs.miscellaneous"]     #list of cogs to load
-TOKEN = str(os.getenv('dotaquiztoken'))
+
+load_dotenv('dotaquiz.env')
+TOKEN = str(os.environ.get('dotaquiztoken1'))
 
 async def load_extensions():
 	for extension in startcogs:
@@ -117,4 +107,4 @@ async def main():
         await load_extensions()
         await bot.start(TOKEN)
 
-#asyncio.run(main())
+asyncio.run(main())

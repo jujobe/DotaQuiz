@@ -1,9 +1,11 @@
 import random
 import discord
-import json, time, os, asyncio
+import time, os, asyncio
 from fuzzywuzzy import fuzz
 from discord.ext import commands
 import quizdata
+from utilities.player import Player
+from database import db
 
 os.chdir(os.getcwd())
 
@@ -16,16 +18,6 @@ questlen, shopkeeplen, iconquizlen, scramblelen = len(questlist)-1, len(shopkeep
 #Prize percentages for 322 freeforall
 prizeperc = {0:0.6, 1:0.2, 2:0.1, 3:0.05, 4:0.05}
 
-jsondir = os.path.dirname(os.path.dirname(os.getcwd())) + "/jsonfiles"
-
-def open_json(jsonfile):
-	with open(jsondir + '/' + jsonfile, "r") as fp:
-		return json.load(fp)	#openfunc for jsonfiles
-
-def save_json(jsonfile, name):	#savefunc for jsonfiles
-	with open(jsondir + '/' + jsonfile, "w") as fp:
-		json.dump(name, fp)
-
 def strip_str(text):		#function to remove punctuations, spaces and "the" from string and make it lowercase,
 	punctuations = ''' !-;:`'".,/_?'''			# in order to compare bot answers and user replies
 	text2 = ""
@@ -34,85 +26,7 @@ def strip_str(text):		#function to remove punctuations, spaces and "the" from st
 			text2 = text2 + char
 	return text2
 
-class Player():
-	def __init__(self, author, ctx):
-		self.server, self.channel, self.author = ctx.guild, ctx.channel, author
-		self.users = open_json("users.json")
-		self.rng = open_json("rngfix.json")
-		id = str(self.author.id)
-		if id not in self.users.keys():
-			self.users[id] = {"gold":10, "items":[], "cheese":0}
-			save_json("users.json", self.users)
-		serv_id = str(self.server.id)
-		if serv_id not in self.rng.keys():
-			self.rng[serv_id] = {"questnumbers":[], "shopkeepnumbers":[], "iconquiznumbers":[], "audioquiznumbers":[], "scramblenumbers":[], "vacuumcd":16}
-			save_json("rngfix.json", self.rng)
-		try:
-			self.inventory = self.users[str(author.id)]["items"]
-		except KeyError:
-			self.inventory = []
 
-		#Items:
-		self.linkens = (4600 in self.inventory)
-		self.MKB = (4852 in self.inventory)
-		self.shiva = (4850 in self.inventory)
-		self.armlet = (2476 in self.inventory)
-		self.midas = (2200 in self.inventory)
-		self.aegis = (8000 in self.inventory)
-		self.pirate_hat = (6500 in self.inventory)
-		self.necronomicon = (4550 in self.inventory)
-		self.aeon_disk = (3100 in self.inventory)
-
-	def unique_int_randomizer(self, length, listkey):		#player.unique_int_randomizer used in par with the rngfix.json file to avoid repeating numbers(questions)
-		serv_id = str(self.server.id)
-		numlist = self.rng[serv_id][listkey]
-		if len(numlist) > length*7/8:			#if amount of numbers surpass 7/8ths of the total amount delete a chunk of the numbers at the start
-			del numlist[:round(length/7)]
-
-		n = random.randint(0, length)		#starter number
-		while n in numlist or n >= length:
-			n = random.randint(0, length)
-			for i in range(15):		#Probe through next 15 numbers, if still not found, rerandom
-				if n not in numlist:		#get a number that isn't already used and append it to the list of numbers in use
-					break
-				n += 1
-		#update the json file and return the valid number
-		numlist.append(n)
-		self.rng[serv_id][listkey] = numlist		#convert list back to string list
-		save_json("rngfix.json", self.rng)
-		return n
-
-	def add_gold(self, newgold):		#add gold to users
-		id = str(self.author.id)
-		multiplier = 1 + 0.2*self.midas + 0.05*self.armlet
-		newgold *= multiplier
-		self.users[id]["gold"] = self.users[id]["gold"] + round(newgold)
-		save_json("users.json", self.users)
-		return round(newgold)
-
-	def set_duration(self, duration):				#Set duration for quiz commands(30% more time if shiva is held)
-		multiplier = 1 + 0.3*self.shiva - 0.1*self.armlet
-		duration *= multiplier
-		return round(duration)
-
-	def set_lives(self, lives):				#Set amount of lives(+1 if the user has aegis)
-		return lives + self.aegis
-
-	def set_plunder(self, plunder):		#Increase gold if user has pirate hat(used for duel)
-		return plunder + 10000*self.pirate_hat
-
-	def set_necro(self, nquestions):		#Increase amount of questions if user has necronomicon(used for freeforall)
-		return nquestions + self.necronomicon*10
-
-	def clutched(self, ncorrectanswsinarow):		#linkens saves one and aeon disk halves the loss
-		if self.linkens:
-			output = ncorrectanswsinarow
-			self.saves -= 1
-		elif self.aeon_disk:
-			output = round(ncorrectanswsinarow / 2)
-		else:
-			output = 0
-		return output
 
 class Quizes(commands.Cog):
 	def __init__(self, bot):
@@ -122,18 +36,16 @@ class Quizes(commands.Cog):
 	@commands.cooldown(1, 7, commands.BucketType.user)
 	async def quiz(self, ctx):
 		try:
-			player = Player(ctx.author, ctx)
+			player = Player(ctx)
 			questn = player.unique_int_randomizer(questlen, "questnumbers")			#Random number to give a random question
 			questobj = questlist[questn]
 			question = questobj.get_question()
 			if questobj.questionType == 2:			#if the question comes with an image
-				await ctx.send(f"**```{question[0]}```**", file=discord.File(f"./quizimages/{question[1]}"))
+				await ctx.send(f"**```{question[0]}```**", file=question[1])
 			else:											#for normal string questions
 				await ctx.send(f"**```{question}```**")
-			def check(m):
-				return m.channel == player.channel and m.author == player.author		#checks if the reply came from the same person in the same channel
 			try:
-				msg = await self.bot.wait_for("message", check=check, timeout=player.set_duration(22))
+				msg = await self.bot.wait_for("message", check=player.check_msg, timeout=player.set_duration(22))
 			except asyncio.TimeoutError:		#If too late
 				await ctx.send(f"**{quizdata.get_answ('L')}** The correct answer was ``{questobj.get_answer()}``")
 			else:
@@ -151,15 +63,13 @@ class Quizes(commands.Cog):
 	@commands.command(brief = "Recognize hero names among scrambled letters.", aliases = ["shuffle", "mix"])
 	@commands.cooldown(1, 8, commands.BucketType.user)
 	async def scramble(self, ctx):
-		player = Player(ctx.author, ctx)
+		player = Player(ctx)
 		scramblen = player.unique_int_randomizer(scramblelen, "scramblenumbers")			#Random number to give a random question
 		scrambleobj = scramblelist[scramblen]
 		correctansw = scrambleobj.get_word()			#the correct answer
 		await ctx.send(f"**``Unscramble this name:``**\n{scrambleobj.get_scramble()}")
-		def check(m):
-			return m.channel == player.channel and m.author == player.author		#checks if the reply came from the same person in the same channel
 		try:
-			msg = await self.bot.wait_for("message", check=check, timeout=player.set_duration(25))
+			msg = await self.bot.wait_for("message", check=player.check_msg, timeout=player.set_duration(25))
 		except asyncio.TimeoutError:		#If too late
 			await ctx.send(f"**{quizdata.get_answ('L')}** The correct answer was ``{correctansw}``")
 		else:
@@ -172,55 +82,58 @@ class Quizes(commands.Cog):
 	@commands.command(brief = "Endlessly sends DotA 2 ability icons to name.", aliases = ["icon"])
 	@commands.cooldown(1, 50, commands.BucketType.user)
 	async def iconquiz(self, ctx):
-		player = Player(ctx.author, ctx)
-		lives = player.set_lives(3)
-		accumulated_g = 0
-		ncorrectansws = 0
-		ncorrectanswsinarow = 0
-		while True:
-			if lives < 0.4:		#ncorrectansws*(accumulated_g+ncorrectansws-1)
-				g = player.add_gold(accumulated_g)		#((2a+d(n-1))/2)n a = accumulated_g d = 2  n = ncorrectansws
-				await ctx.send(f"You ran out of lives, you got ``{ncorrectansws}`` correct answers and accumulated ``{g}`` gold.")
-				break
-			elif lives == 322:
-				g = player.add_gold(accumulated_g)		#((2a+d(n-1))/2)n a = accumulated_g d = 2  n = ncorrectansws
-				await ctx.send(f"You have stopped the iconquiz, you got ``{ncorrectansws}`` correct answers and accumulated ``{g}`` gold.")
-				break
-			iconn = player.unique_int_randomizer(iconquizlen, "iconquiznumbers")	#Random number to give a random icon
-			iconobj = iconquizlist[iconn]
-			question = iconobj.get_image()
-			await ctx.send(f"**``Name the shown icon.``**", file=discord.File(f"./iconquizimages/{question}"))
-			def check(m):
-				return m.channel == player.channel and m.author == player.author		#checks if the reply came from the same person in the same channel
-			try:
-				msg = await self.bot.wait_for("message", check=check, timeout=player.set_duration(13))
-			except asyncio.TimeoutError:			#If too late
-				lives -= 1
-				await ctx.send(f"**{quizdata.get_answ('L')}** The correct answer was ``{iconobj.get_answer()}``, ``{lives}`` lives remaining.")
-				accumulated_g -= 10
-				ncorrectanswsinarow = player.clutched(ncorrectanswsinarow)
-				time.sleep(0.2)
-			else:
-				if strip_str(msg.content) == "skip":
-					lives -= 0.5
-					ncorrectanswsinarow = player.clutched(ncorrectanswsinarow)
-					await ctx.send(f"The correct answer was ``{iconobj.get_answer()}``, you have ``{lives}`` lives remaining.")
-				elif strip_str(msg.content) == "stop":
-					lives = 322
-				elif iconobj.check_answer(msg.content, player.MKB):
-					await ctx.send(f"**{quizdata.get_answ('R')}**")
-					accumulated_g += 20 + 5*ncorrectanswsinarow
-					ncorrectansws += 1
-					ncorrectanswsinarow += 1
-				else:
+		try:
+			player = Player(ctx)
+			lives = player.set_lives(3)
+			accumulated_g = 0
+			ncorrectansws = 0
+			ncorrectanswsinarow = 0
+			while True:
+				if lives < 0.4:		#ncorrectansws*(accumulated_g+ncorrectansws-1)
+					g = player.add_gold(accumulated_g)		#((2a+d(n-1))/2)n a = accumulated_g d = 2  n = ncorrectansws
+					await ctx.send(f"You ran out of lives, you got ``{ncorrectansws}`` correct answers and accumulated ``{g}`` gold.")
+					break
+				elif lives == 322:
+					g = player.add_gold(accumulated_g)		#((2a+d(n-1))/2)n a = accumulated_g d = 2  n = ncorrectansws
+					await ctx.send(f"You have stopped the iconquiz, you got ``{ncorrectansws}`` correct answers and accumulated ``{g}`` gold.")
+					break
+				iconn = player.unique_int_randomizer(iconquizlen, "iconquiznumbers")	#Random number to give a random icon
+				iconobj = iconquizlist[iconn]
+				question = iconobj.get_image()
+				await ctx.send(f"**``Name the shown icon.``**", file=question)
+				try:
+					msg = await self.bot.wait_for("message", check=player.check_msg, timeout=player.set_duration(13))
+				except asyncio.TimeoutError:			#If too late
 					lives -= 1
+					await ctx.send(f"**{quizdata.get_answ('L')}** The correct answer was ``{iconobj.get_answer()}``, ``{lives}`` lives remaining.")
+					accumulated_g -= 10
 					ncorrectanswsinarow = player.clutched(ncorrectanswsinarow)
-					await ctx.send(f"**{quizdata.get_answ('W')}** The correct answer was ``{iconobj.get_answer()}``, ``{lives}`` lives remaining.")
+					time.sleep(0.2)
+				else:
+					if strip_str(msg.content) == "skip":
+						lives -= 0.5
+						ncorrectanswsinarow = player.clutched(ncorrectanswsinarow)
+						await ctx.send(f"The correct answer was ``{iconobj.get_answer()}``, you have ``{lives}`` lives remaining.")
+					elif strip_str(msg.content) == "stop":
+						lives = 322
+					elif iconobj.check_answer(msg.content, player.MKB):
+						await ctx.send(f"**{quizdata.get_answ('R')}**")
+						accumulated_g += 20 + 5*ncorrectanswsinarow
+						ncorrectansws += 1
+						ncorrectanswsinarow += 1
+					else:
+						lives -= 1
+						ncorrectanswsinarow = player.clutched(ncorrectanswsinarow)
+						await ctx.send(f"**{quizdata.get_answ('W')}** The correct answer was ``{iconobj.get_answer()}``, ``{lives}`` lives remaining.")
+		except Exception as e:
+			print("quizes.py: iconquiz: ", e)
+
+
 
 	@commands.command(brief = "iconquiz as a multiple choice test.", aliases = ["easyicon"], hidden=True)
 	@commands.cooldown(1, 50, commands.BucketType.user)
 	async def easyiconquiz(self, ctx):
-		player = Player(ctx.author, ctx)
+		player = Player(ctx)
 		lives = player.set_lives(3)
 		accumulated_g = 0
 		ncorrectansws = 0
@@ -255,10 +168,8 @@ class Quizes(commands.Cog):
 					result += " **|		|** "
 			iconembed.add_field(name="Possible answers:", value=result+"*Type in the letter you consider correct.*", inline=True)
 			await ctx.send(file=iconimage, embed=iconembed)
-			def check(m):
-				return m.channel == player.channel and m.author == player.author		#checks if the reply came from the same person in the same channel
 			try:
-				msg = await self.bot.wait_for("message", check=check, timeout=player.set_duration(8))
+				msg = await self.bot.wait_for("message", check=player.check_msg, timeout=player.set_duration(8))
 			except asyncio.TimeoutError:			#If too late
 				lives -= 1
 				await ctx.send(f"**{quizdata.get_answ('L')}** The correct answer was ``{correctansw}``, ``{lives}`` lives remaining.")
@@ -291,7 +202,7 @@ class Quizes(commands.Cog):
 	@commands.command(brief = "Endlessly sends DotA2 items to be assembled.", aliases=["recipe"])
 	@commands.cooldown(1, 50, commands.BucketType.user)
 	async def shopquiz(self, ctx):
-		player = Player(ctx.author, ctx)
+		player = Player(ctx)
 		accumulated_g = 0			#gold that will be given to the user at the end
 		lives = player.set_lives(3)		#tries they have for the shopkeeperquiz
 		ncorrectansws = 0			#number of items they completed
@@ -309,10 +220,8 @@ class Quizes(commands.Cog):
 			shopkeepobj = shopkeeplist[shopkeepn]
 			itemimage, itemembed = shopkeepobj.create_embed()
 			await ctx.send(file=itemimage, embed=itemembed)
-			def check(m):
-				return m.channel == player.channel and m.author == player.author
 			try:
-				msg = await self.bot.wait_for("message", check=check, timeout=player.set_duration(21))
+				msg = await self.bot.wait_for("message", check=player.check_msg, timeout=player.set_duration(21))
 			except asyncio.TimeoutError:					#If too late
 				lives -= 1
 				await ctx.send(f"**{quizdata.get_answ('L')}** This item can be built with ``{shopkeepobj.get_answer()}`` You have ``{lives}`` lives remaining.")
@@ -340,7 +249,7 @@ class Quizes(commands.Cog):
 	@commands.command(brief = "Set of questions multiple people can answer.", aliases = ["ffa"], hidden=True)
 	@commands.cooldown(1, 80, commands.BucketType.channel)
 	async def freeforall(self, ctx):
-		player = Player(ctx.author, ctx)
+		player = Player(ctx)
 		usersdict = {player.author:0}			#dictionary that consists of all the participants and their points
 		nquestions = player.set_necro(25)		#number of questions that will be asked
 		ncorrectansws = 0			#number of correctly answered questions by everyone
@@ -387,7 +296,7 @@ class Quizes(commands.Cog):
 				question, answer = questobj.get_question(), questobj.get_answer()
 				correctansw = find_correct_answer(answer)
 				if type(question) == tuple:		#if the question comes with an image
-					await ctx.send(f"**```{question[0]}```**", file=discord.File(f"./quizimages/{question[1]}"))
+					await ctx.send(f"**```{question[0]}```**", file=question[1])
 				else:										#for normal string questions
 					await ctx.send(f"**```{question}```**")
 				giventime = questobj.get_time()
@@ -425,7 +334,7 @@ class Quizes(commands.Cog):
 				iconn = player.unique_int_randomizer(iconquizlen, "iconquiznumbers")	#Random number to give a random icon
 				question, answer = iconquizkeys[iconn], iconquizvalues[iconn]
 				correctansw = find_correct_answer(answer)	#Find the correct answer to be displayed incase user gets it wrong
-				await ctx.send(f"**``Name the shown ability.``**", file=discord.File(f"./iconquizimages/{question}"))
+				await ctx.send(f"**``Name the shown ability.``**", file=question)
 				def check(m):
 					return m.channel == player.channel and m.author != self.bot.user		#checks if the reply came from the same channel
 				counter = 0				#counter to allow only 3 incorrect answers before moving on
@@ -460,7 +369,7 @@ class Quizes(commands.Cog):
 	@commands.command(brief = "Rapid questions that give more gold but with a risk.")
 	@commands.cooldown(1, 52, commands.BucketType.channel)
 	async def blitz(self, ctx):
-		player = Player(ctx.author, ctx)
+		player = Player(ctx)
 		timeout = player.set_duration(50) #full time for blitz round
 		accumulated_g = 0
 		ncorrectansws = 0
@@ -477,16 +386,14 @@ class Quizes(commands.Cog):
 			questobj = questlist[questn]
 			question = questobj.get_question()
 			if questobj.questionType == 2:		#if the question comes with an image
-				await ctx.send(f"**```{question[0]}```**", file=discord.File(f"./quizimages/{question[1]}"))
+				await ctx.send(f"**```{question[0]}```**", file=question[1])
 			else:										#for normal string questions
 				await ctx.send(f"**```{question}```**")
 			straddon = 'The correct answer was' #For incorrect answer
 			if questobj.answerType != 1:
 				straddon = 'One of the possible correct answer was'
-			def check(m):
-				return m.channel == player.channel and m.author == player.author		#checks if the reply came from the same person in the same channel
 			try:
-				msg = await self.bot.wait_for("message", check=check, timeout=player.set_duration(questobj.get_time()))
+				msg = await self.bot.wait_for("message", check=player.check_msg, timeout=player.set_duration(questobj.get_time()))
 			except asyncio.TimeoutError:			#If too late
 				await ctx.send(f"**{quizdata.get_answ('L')}** {straddon} ``{questobj.get_answer()}``")
 				accumulated_g -= 21
@@ -504,7 +411,7 @@ class Quizes(commands.Cog):
 	@commands.command(brief = "Duel another user for gold.", hidden=True)
 	@commands.cooldown(1, 45, commands.BucketType.channel)
 	async def duel(self, ctx, opponent: discord.Member, wager:int):
-		player1 = Player(ctx.author, ctx)
+		player1 = Player(ctx)
 		maxwager = player1.set_plunder(10000)
 		if str(opponent.id) not in player1.users.keys():
 			await ctx.send("That user doesn't have any gold to duel.")
@@ -560,7 +467,7 @@ class Quizes(commands.Cog):
 						question, answer = questkeys[questn], questvalues[questn]
 						correctansw = find_correct_answer(answer)	#Find the correct answer to be displayed incase user gets it wrong
 						if type(question) == tuple:			#if the question comes with an image
-							await ctx.send(f"**```{question[0]}```**", file=discord.File(f"./quizimages/{question[1]}"))
+							await ctx.send(f"**```{question[0]}```**", file=question[1])
 							questionsasked += 1
 						else:						#for normal string questions
 							await ctx.send(f"**```{question}```**")
@@ -599,7 +506,7 @@ class Quizes(commands.Cog):
 	@commands.command(brief = "Endless mix of questions, items, icons and scrambles.", hidden=True)
 	@commands.cooldown(1, 400, commands.BucketType.user)
 	async def endless(self, ctx):
-		player = Player(ctx.author, ctx)
+		player = Player(ctx)
 		try:
 			if 4200 in player.inventory:
 				accumulated_g = 0		#accumulated gold during the quiz
@@ -621,13 +528,11 @@ class Quizes(commands.Cog):
 							question, answer = questkeys[questn], questvalues[questn]
 							correctansw = find_correct_answer(answer)		#obtaining the correct answer to display later
 							if type(question) == tuple:		#if the question comes with an image
-								await ctx.send(f"**```{question[0]}```**", file=discord.File(f"./quizimages/{question[1]}"))
+								await ctx.send(f"**```{question[0]}```**", file=question[1])
 							else:					#for normal string questions
 								await ctx.send(f"**```{question}```**")
-							def check(m):
-								return m.channel == player.channel and m.author == player.author	#checks if the reply came from the same person in the same channel
 							try:
-								msg = await self.bot.wait_for("message", check=check, timeout=player.set_duration(16))
+								msg = await self.bot.wait_for("message", check=player.check_msg, timeout=player.set_duration(16))
 							except asyncio.TimeoutError:	#If too late
 								lives -= 1
 								await ctx.send(f"**{quizdata.get_answ('L')}**, the correct answer was ``{correctansw}``, ``{lives}`` lives left.")
@@ -678,10 +583,8 @@ class Quizes(commands.Cog):
 								result += " **| |** "
 						itemembed.add_field(name="Possible answers:", value=result+"*Type in the letters of the items you consider correct.*", inline=True)
 						await ctx.send(file=itemimage, embed=itemembed)
-						def check(m):
-							return m.channel == player.channel and m.author == player.author
 						try:
-							msg = await self.bot.wait_for("message", check=check, timeout=player.set_duration(21))
+							msg = await self.bot.wait_for("message", check=player.check_msg, timeout=player.set_duration(21))
 						except asyncio.TimeoutError:					#If too late
 							lives -= 1
 							await ctx.send(f"**{quizdata.get_answ('L')}** This item can be built with ``{correctansw}`` You have ``{lives}`` lives remaining.")
@@ -716,11 +619,9 @@ class Quizes(commands.Cog):
 						iconn = player.unique_int_randomizer(iconquizlen, "iconquiznumbers")		#Random number to give a random icon
 						question, answer = iconquizkeys[iconn], iconquizvalues[iconn]
 						correctansw = find_correct_answer(answer)		#Find the correct answer to be displayed incase user gets it wrong
-						await ctx.send(f"**``Name the shown ability.``**", file=discord.File(f"./iconquizimages/{question}"))
-						def check(m):
-							return m.channel == player.channel and m.author == player.author	#checks if the reply came from the same person in the same channel
+						await ctx.send(f"**``Name the shown ability.``**", file=question)
 						try:
-							msg = await self.bot.wait_for("message", check=check, timeout=player.set_duration(12))
+							msg = await self.bot.wait_for("message", check=player.check_msg, timeout=player.set_duration(12))
 						except asyncio.TimeoutError:	#If too late
 							lives -= 1
 							await ctx.send(f"**{quizdata.get_answ('L')}** The correct answer was ``{correctansw}``, ``{lives}`` lives remaining.")
@@ -750,10 +651,8 @@ class Quizes(commands.Cog):
 							scrambledworde.append(charemojies[char])		#picking up values of charemojies of the lowercase characters
 						output = " ".join(scrambledworde)					#joining them to form a string of all emojies to output
 						await ctx.send(f"**``Unscramble this word:``**\n{output}")
-						def check(m):
-							return m.channel == player.channel and m.author == player.author		#checks if the reply came from the same person in the same channel
 						try:
-							msg = await self.bot.wait_for("message", check=check, timeout=player.set_duration(20))
+							msg = await self.bot.wait_for("message", check=player.check_msg, timeout=player.set_duration(20))
 						except asyncio.TimeoutError:		#If too late
 							lives -= 1
 							await ctx.send(f"**{quizdata.get_answ('L')}** The correct answer was ``{correctansw}`` You have ``{lives}`` remaining.")
@@ -782,22 +681,23 @@ class Quizes(commands.Cog):
 
 	@quiz.error
 	async def quizerror(self, ctx, error):
-		if isinstance(error, commands.CommandOnCooldown):
-			users = open_json("users.json")
-			if 5000 in users[str(ctx.message.author.id)]["items"]:
-				if error.retry_after < 3:		#if user has octarine and the remaining time of the cooldown is Less
-					await ctx.reinvoke()		#than the time octarine saves the user just bypasses the cooldownerror
-					return
+		try:
+			if isinstance(error, commands.CommandOnCooldown):
+				if db.check_octarine(ctx.author.id):
+					if error.retry_after < 3:		#if user has octarine and the remaining time of the cooldown is Less
+						await ctx.reinvoke()		#than the time octarine saves the user just bypasses the cooldownerror
+						return
+					else:
+						await ctx.send("**Quiz** is on **cooldown** at the moment. Try again in a few seconds")
 				else:
-					await ctx.send("**Quiz** is on **cooldown** at the moment. Try again in a few seconds")
-			else:
-				await ctx.send("**Quiz** is on **cooldown** at the moment. You can buy an Octarine Core in the store to decrease command cooldowns.")
+					await ctx.send("**Quiz** is on **cooldown** at the moment. You can buy an Octarine Core in the store to decrease command cooldowns.")
+		except Exception as e:
+			print("quizes.py, quizerror: ", e)
 
 	@iconquiz.error
 	async def iconquizerror(self, ctx, error):
 		if isinstance(error, commands.CommandOnCooldown):
-			users = open_json("users.json")
-			if 5000 in users[str(ctx.message.author.id)]["items"]:
+			if db.check_octarine(ctx.author.id):
 				if error.retry_after < 13:
 					await ctx.reinvoke()
 					return
@@ -809,8 +709,7 @@ class Quizes(commands.Cog):
 	@scramble.error
 	async def scrambleerror(self, ctx, error):
 		if isinstance(error, commands.CommandOnCooldown):
-			users = open_json("users.json")
-			if 5000 in users[str(ctx.message.author.id)]["items"]:
+			if db.check_octarine(ctx.author.id):
 				if error.retry_after < 3:
 					await ctx.reinvoke()
 					return
@@ -822,8 +721,7 @@ class Quizes(commands.Cog):
 	@shopquiz.error
 	async def shopquizerror(self, ctx, error):
 		if isinstance(error, commands.CommandOnCooldown):
-			users = open_json("users.json")
-			if 5000 in users[str(ctx.message.author.id)]["items"]:
+			if db.check_octarine(ctx.author.id):
 				if error.retry_after < 12.5:
 					await ctx.reinvoke()
 					return
@@ -856,8 +754,7 @@ class Quizes(commands.Cog):
 	@endless.error
 	async def endlesserror(self, ctx, error):
 		if isinstance(error, commands.CommandOnCooldown):
-			users = open_json("users.json")
-			if 5000 in users[str(ctx.message.author.id)]["items"]:
+			if db.check_octarine(ctx.author.id):
 				if error.retry_after < 100:
 					await ctx.reinvoke()
 					return

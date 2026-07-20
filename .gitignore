@@ -6,3 +6,9 @@ imageadder.py
 dotaicons
 __pycache__
 cogs/__pycache__
+*.zip
+*.rar
+migration.py
+dotaquizenv
+DotaQuiz.db
+*.env
