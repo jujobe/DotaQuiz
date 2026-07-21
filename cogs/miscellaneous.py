@@ -2,8 +2,9 @@ import random
 import discord
 import os, json
 from discord.ext import commands
-import quizdata
-from database import db
+import utilities.quizdata as quizdata
+from utilities.database import db
+from utilities.helpers import strip_str
 
 os.chdir(os.getcwd())
 
@@ -15,17 +16,6 @@ for key, value in copypastainfo.items():
     pastas.append(key + "   ––––	" + value)
 pastalist = discord.Embed(colour=0x9b59b6)
 pastalist.add_field(name="Copypastas:", value="\n".join(pastas), inline=False)
-
-jsondir = os.path.dirname(os.path.dirname(os.getcwd())) + "//jsonfiles"
-
-def strip_str(text):		#function to remove punctuations, spaces and "the" from string and make it lowercase,
-	punctuations = ''' !-;:`'",/_?'''			# in order to compare bot answers and user replies
-	text2 = ""
-	text.replace("the ", "")
-	for char in text:
-		if char not in punctuations:
-			text2 = text2 + char
-	return text2.lower()
 
 class Miscellaneous(commands.Cog):
     def __init__(self, bot):

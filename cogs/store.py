@@ -1,21 +1,14 @@
 import discord
 import os, asyncio
 from discord.ext import commands
-import quizdata
-from database import db
+import utilities.quizdata as quizdata
+from utilities.database import db
+from utilities.helpers import strip_str
 
 os.chdir(os.getcwd())
 
 store_items, store_descriptions = quizdata.store_items, quizdata.store_descriptions
 storekeys, storevalues = list(store_items.keys()), list(store_items.values())
-
-def strip_str(text):        #function to remove punctuations spaces from string and make it lowercase
-    punctuations = ''' !-;:'`" ,/_?'''
-    text2 = ""
-    for char in text:
-       if char not in punctuations:
-           text2 = text2 + char
-    return text2.lower().replace("the", "")
 
 def helm_of_dominator(items, price):       #give discount if userhas helm of the dominator
     if ("Helm of Dominator" in items):

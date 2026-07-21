@@ -2,8 +2,8 @@ import discord
 import os, asyncio, itertools
 import sys, traceback
 from discord.ext import commands
-import quizdata
-from database import db
+import utilities.quizdata as quizdata
+from utilities.database import db
 from dotenv import load_dotenv
 
 #Adding parent directory to path so cogs can import quizdata

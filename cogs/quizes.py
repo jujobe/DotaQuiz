@@ -3,9 +3,10 @@ import discord
 import time, os, asyncio
 from fuzzywuzzy import fuzz
 from discord.ext import commands
-import quizdata
+import utilities.quizdata as quizdata
 from utilities.player import Player
-from database import db
+from utilities.database import db
+from utilities.helpers import strip_str
 
 os.chdir(os.getcwd())
 
@@ -17,16 +18,6 @@ questlen, shopkeeplen, iconquizlen, scramblelen = len(questlist)-1, len(shopkeep
 
 #Prize percentages for 322 freeforall
 prizeperc = {0:0.6, 1:0.2, 2:0.1, 3:0.05, 4:0.05}
-
-def strip_str(text):		#function to remove punctuations, spaces and "the" from string and make it lowercase,
-	punctuations = ''' !-;:`'".,/_?'''			# in order to compare bot answers and user replies
-	text2 = ""
-	for char in text.lower().replace("the ", ""):
-		if char not in punctuations:
-			text2 = text2 + char
-	return text2
-
-
 
 class Quizes(commands.Cog):
 	def __init__(self, bot):

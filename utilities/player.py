@@ -1,4 +1,4 @@
-from database import db
+from utilities.database import db
 import random
 
 class Player():
