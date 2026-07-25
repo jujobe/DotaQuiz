@@ -21,7 +21,7 @@ class Miscellaneous(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(brief = "See the top 10 cheese collectors.", aliases = ["board"])
+    @commands.command(brief = "See the top 10 cheese collectors.", aliases = ["board"], hidden=True)
     async def cheeseboard(self, ctx):
         try:
             cheesers = db.get_cheeseboard()
@@ -33,11 +33,11 @@ class Miscellaneous(commands.Cog):
             for n in range(0, 10):
                 user = ctx.guild.get_member(int(sortkeys[n]))
                 if type(user) == discord.Member:        #if user is in the server it will display the name
-                    multiplier = 44 - len(user.display_name)
-                    if n == 9:          #if it's the 10th user it will be less indented to be in line with other users
-                        basetext = basetext + str(n+1) + ")" + user.display_name + " "*(multiplier-1) + str(sortvalues[n])
-                    else:
-                        basetext = basetext + str(n+1) + ")" + user.display_name + " "*multiplier + str(sortvalues[n]) + "\n"
+                multiplier = 44 - len(user.display_name)
+                if n == 9:          #if it's the 10th user it will be less indented to be in line with other users
+                    basetext = basetext + str(n+1) + ")" + user.display_name + " "*(multiplier-1) + str(sortvalues[n])
+                else:
+                    basetext = basetext + str(n+1) + ")" + user.display_name + " "*multiplier + str(sortvalues[n]) + "\n"
                 else:           #otherwise it will just say "hidden" instead
                     if n == 9:        #if it's the 10th user it will be less indented to be in line with other users
                         basetext = basetext + str(n+1) + ")[Hidden User]" + " "*30 + str(sortvalues[n])
