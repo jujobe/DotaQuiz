@@ -72,12 +72,20 @@ async def on_guild_remove(guild):       #removes server from rngfix.json if bot 
 
 @bot.command(brief = "An invite to our discord server!")
 async def serverinvite(ctx):             #sends bot information and server invite link to the server
-    user = bot.get_user(ctx.author.id)
     try:
-        await user.send("Note that many of the questions used by this bot were written without factchecking so you might find some incorrect information, typos and grammatical errors, new patches always make some questions outdated, if you wish to report these mistakes, just want to give feedback and suggestions or wish to see updates you can do so on this discord server:  https://discord.gg/nhBvdqV ")
+        await ctx.author.send("Note that many of the questions used by this bot were written without factchecking so you might find some incorrect information, typos and grammatical errors, new patches always make some questions outdated, if you wish to report these mistakes, just want to give feedback and suggestions or wish to see updates you can do so on this discord server:  https://discord.gg/nhBvdqV ")
         await ctx.send("Info has been sent to you.")
     except Exception:
         await ctx.send("Info can't be sent to you in direct messages(Due to your account privacy settings).")
+
+@bot.command(brief = "View the Privacy Policy.")
+async def privacypolicy(ctx):             #sends the bot's privacy policy
+    try:
+        await ctx.author.send("You can view the DotaQuiz bot privacy policy here:\n https://github.com/jujobe/DotaQuiz/blob/main/PRIVACY.md \n If you have any concerns or questions please contact us via our Discord server. \n There is a separate command for the server invite.")
+        await ctx.send("Info has been sent to you.")
+    except Exception:
+        await ctx.send("Info can't be sent to you in direct messages(Due to your account privacy settings).")
+
 
 #event for wrong "322 cmnd"
 @bot.event              #ignore and raise certain errors

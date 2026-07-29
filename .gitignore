@@ -12,3 +12,4 @@ migration.py
 dotaquizenv
 DotaQuiz.db
 *.env
+run.sh

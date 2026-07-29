@@ -70,7 +70,7 @@ class Quizes(commands.Cog):
 			else:
 				await ctx.send(f"**{quizdata.get_answ('W')}** The correct answer was ``{correctansw}``")
 
-	@commands.command(brief = "Endlessly sends DotA 2 ability icons to name.", aliases = ["icon"])
+	@commands.command(brief = "Endlessly sends DotA2 ability icons to name.", aliases = ["icon"])
 	@commands.cooldown(1, 50, commands.BucketType.user)
 	async def iconquiz(self, ctx):
 		try:
@@ -118,7 +118,6 @@ class Quizes(commands.Cog):
 						await ctx.send(f"**{quizdata.get_answ('W')}** The correct answer was ``{iconobj.get_answer()}``, ``{lives}`` lives remaining.")
 		except Exception as e:
 			print("quizes.py: iconquiz: ", e)
-
 
 
 	@commands.command(brief = "iconquiz as a multiple choice test.", aliases = ["easyicon"], hidden=True)
@@ -278,6 +277,7 @@ class Quizes(commands.Cog):
 					await ctx.send("**Nobody got a positive amount of points. :(**")
 
 				break
+
 			time.sleep(0.35)
 			nquestions -= 1
 			decider = random.randint(0, 1)

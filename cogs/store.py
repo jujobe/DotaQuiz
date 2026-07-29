@@ -26,7 +26,7 @@ class Store(commands.Cog):
             multiplier = 23 - len(item)
             multiplier2 = 9 - len(str(store_items[item]))
             artifacts = artifacts + item + (multiplier * " ") + str(store_items[item]) + (multiplier2 * " ") + store_descriptions[item] + " \n"
-        await ctx.send(f"``` Item:               Price:    Description: \n{artifacts}```")
+        await ctx.send(f"``` --Item--            --Price--  --Description--\n{artifacts}```")
 
     @commands.command(brief = "Buy an item from the store.")
     async def buy(self, ctx, *, purchase):
