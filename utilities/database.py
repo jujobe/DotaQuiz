@@ -1,5 +1,7 @@
 import sqlite3
+import os
 
+os.chdir(os.getcwd())
 
 class Database:
     def __init__(self, db_file='./DotaQuizDB/DotaQuiz.db'):
