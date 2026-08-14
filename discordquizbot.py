@@ -99,7 +99,7 @@ async def on_command_error(ctx, error):
 
 startcogs = ["cogs.quizes", "cogs.store", "cogs.miscellaneous"]     #list of cogs to load
 
-load_dotenv('dotaquiz.env')
+# load_dotenv('dotaquiz.env')
 TOKEN = str(os.environ.get('dotaquiztoken1'))
 
 async def load_extensions():

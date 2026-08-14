@@ -2,7 +2,7 @@ import sqlite3
 
 
 class Database:
-    def __init__(self, db_file='DotaQuiz.db'):
+    def __init__(self, db_file='./DotaQuizDB/DotaQuiz.db'):
         self.db_file = db_file
     
     def get_connection(self):
