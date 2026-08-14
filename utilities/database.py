@@ -350,4 +350,4 @@ class Database:
 
 
 
-db = Database('DotaQuiz.db')
+db = Database('./DotaQuizDB/DotaQuiz.db')
