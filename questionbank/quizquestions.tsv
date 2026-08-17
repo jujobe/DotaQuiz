@@ -1,4 +1,4 @@
-#	Question	Question Type	QuestionTypeId	Answer(s)	AnswerType	AnswerTypeID	Secondary Answers	Question Image
+#	Question	Question Type	QuestionTypeId	Answer	AnswerType	AnswerTypeId	SecondaryAnswers	QuestionImage
 1	What is Dark Seer's ultimate ability?	Text	1	Wall of Replica	Single answer + alt spellings	2	vacuum	
 2	What is Arteezy's real name?	Text	1	Artour Babaev, Artour	Single answer + alt spellings	2		
 3	What year was the 7.00 update released?	Text	1	2016	Single answer	1		
